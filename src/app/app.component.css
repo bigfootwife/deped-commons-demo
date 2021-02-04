@@ -1,0 +1,64 @@
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+user agent stylesheet
+div {
+    display: block;
+}
+body {
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #2F2F33;
+    text-align: left;
+    background-color: #F9FBFD;
+}
+:root {
+    --blue: #1637C0;
+    --indigo: #727cf5;
+    --purple: #6b5eae;
+    --pink: #ff679b;
+    --red: #E63757;
+    --orange: #fd7e14;
+    --yellow: #F6C343;
+    --green: #00D97E;
+    --teal: #02a8b5;
+    --cyan: #39afd1;
+    --white: #FFFFFF;
+    --gray: #95AAC9;
+    --gray-light: #D2D2D2;
+    --gray-lighter: #F8F8F8;
+    --gray-dark: #3B506C;
+    --primary: #1637C0;
+    --secondary: #6D6D6D;
+    --success: #00D97E;
+    --info: #39afd1;
+    --warning: #F6C343;
+    --danger: #E63757;
+    --light: #EDF2F9;
+    --dark: #12263F;
+    --white: #FFFFFF;
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    --font-family-sans-serif: "Roboto", sans-serif;
+    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+html {
+    font-family: sans-serif;
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(18, 38, 63, 0);
+}
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
