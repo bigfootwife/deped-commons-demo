@@ -10,36 +10,15 @@
 <body onload="init()">
   <app-root></app-root>
 
-  <div id="container-div" style="width: 400px;height: 800px;"></div>
-    <script type="text/javascript">
-      var containerDiv = document.getElementById("container-div");
-      var instanceURL = "https://depedchatbot.awsapps.com/connect/ccp-v2/";
-      // initialize the streams api
-      function init() {
-        // initialize the ccp
-        connect.core.initCCP(containerDiv, {
-          ccpUrl: instanceURL,            // REQUIRED
-          loginPopup: true,               // optional, defaults to `true`
-          loginPopupAutoClose: true,      // optional, defaults to `true`
-          loginOptions: {                 // optional, if provided opens login in new window
-            autoClose: true,              // optional, defaults to `false`
-            height: 600,                  // optional, defaults to 578
-            width: 400,                   // optional, defaults to 433
-            top: 0,                       // optional, defaults to 0
-            left: 0                       // optional, defaults to 0
-          },
-          region: "ap-southeast-1",         // REQUIRED for `CHAT`, optional otherwise
-          softphone: {                    // optional
-            allowFramedSoftphone: true,   // optional
-            disableRingtone: false,       // optional
-            ringtoneUrl: "./ringtone.mp3" // optional
-           },
-           pageOptions: { //optional
-            enableAudioDeviceSettings: false, //optional, defaults to 'false'
-            enablePhoneTypeSettings: true //optional, defaults to 'true' 
-           }       
-         });
-      }
-    </script>
+  <script src="https://d21izz2ec1igi0.cloudfront.net/lex-web-ui-loader.min.js"></script>
+  <script>
+    var loaderOpts = {
+      baseUrl: 'https://d21izz2ec1igi0.cloudfront.net/',
+      shouldLoadMinDeps: true
+    };
+    var loader = new ChatBotUiLoader.IframeLoader(loaderOpts);
+    loader.load()
+      .catch(function (error) { console.error(error); });
+  </script>
 </body>
 </html>
