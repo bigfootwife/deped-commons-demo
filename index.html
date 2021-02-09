@@ -388,8 +388,15 @@
 
 
           function failureHandler(error) {
-              // chat failed
-              console.log("failed", error);
+            // chat failed
+            console.log("failed", error);
+            $("#section-main").show();
+            $("#section-main").css("display","block");
+
+            $("#section-chat").removeAttr('style');
+            $("#nav").css("width", "690");
+            $("#section-chat").hide("slide");
+            document.getElementById("contactDetails").reset();
           }
 
           function resetForm() {
