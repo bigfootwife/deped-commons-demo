@@ -300,20 +300,20 @@
                       console.log("this is the username: " + username);
                       document.getElementById("contactDetails").reset();
                       document.getElementById("section-main").style.display = "none";
-                      // connect.ChatInterface.initiateChat({
-                      //     name: customerName,
-                      //     username: username,
-                      //     region: "ap-southeast-1",
-                      //     apiGatewayEndpoint: "https://ykofbsjd87.execute-api.ap-southeast-1.amazonaws.com/Prod",
-                      //     contactAttributes: JSON.stringify({
-                      //         "customerName": customerName
-                      //     }),
-                      //     contactFlowId: "5355e64c-512c-4801-8aa1-952156bafa8a",
-                      //     instanceId: "80c66705-d0c3-44dd-af97-49429522072f",
-                      //     featurePermissions: {
-                      //         "ATTACHMENTS": enableAttachments==='true',  // this is the override flag from user for attachments
-                      //     }
-                      // },successHandler, failureHandler);
+                      connect.ChatInterface.initiateChat({
+                          name: customerName,
+                          username: username,
+                          region: "ap-southeast-1",
+                          apiGatewayEndpoint: "https://ykofbsjd87.execute-api.ap-southeast-1.amazonaws.com/Prod",
+                          contactAttributes: JSON.stringify({
+                              "customerName": customerName
+                          }),
+                          contactFlowId: "5355e64c-512c-4801-8aa1-952156bafa8a",
+                          instanceId: "80c66705-d0c3-44dd-af97-49429522072f",
+                          featurePermissions: {
+                              "ATTACHMENTS": enableAttachments==='true',  // this is the override flag from user for attachments
+                          }
+                      },successHandler, failureHandler);
                       // document.getElementById("startChat").disabled = true;
                       // document.getElementById("firstName").disabled = true;
                       // document.getElementById("username").disabled = true;
