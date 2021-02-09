@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>DepedCommonsDemo</title>
-  <base href="https://bigfootwife.github.io/deped-commons-demo/">
+  <base href="https://bigfootwife.githubio./deped-commons-demo/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
@@ -63,8 +63,11 @@
           max-width: 365px;
           height: 525px;
           margin-left: 3px;
-          float: right;
+          float: left;
+
           overflow: auto;
+          overflow-x: hidden;
+          
           border-radius: 5px 5px 45px 5px;
 
           right: 0px;
@@ -396,7 +399,9 @@
             //   document.getElementById("firstName").disabled = false;
             //   document.getElementById("username").disabled = false;
             console.log("resetForm");
-            $("#section-main").hide();
+            $("#section-main").show();
+            $("#section-main").css("display","block");
+
             $("#section-chat").removeAttr('style');
             $("#nav").css("width", "690");
             $("#section-chat").hide("slide");
