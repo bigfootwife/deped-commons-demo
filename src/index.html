@@ -61,14 +61,16 @@
           display: table-cell;
           padding: 3px;
           max-width: 365px;
-          height: 510px;
+          height: 525px;
           margin-left: 3px;
-          float: left;
+          float: right;
           overflow: auto;
           border-radius: 5px 5px 45px 5px;
 
           right: 0px;
-          bottom: 5px;
+          bottom: 0px;
+          background-color: #ffffff;
+          z-index: 5;
 
       }
 
@@ -395,6 +397,7 @@
             //   document.getElementById("startChat").disabled = false;
             //   document.getElementById("firstName").disabled = false;
             //   document.getElementById("username").disabled = false;
+            console.log("resetForm");
             $("#section-main").hide();
             $("#section-chat").removeAttr('style');
             $("#nav").css("width", "690");
