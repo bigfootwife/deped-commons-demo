@@ -220,279 +220,279 @@
   </style>
 
   <div class="wrap">
-    <section class="section-main" id="section-main">
-        <header>
-            <h1 align="center" style="font-size: 1.5em">Amazon Connect Omni-Channel Demo</h1>
-        </header>
+      <section class="section-main" id="section-main">
+          <header>
+              <h1 align="center" style="font-size: 1.5em">Amazon Connect Omni-Channel Demo</h1>
+          </header>
 
-        <form name="contactDetails" id="contactDetails" style="padding-top: 30px">
-            <fieldset>
-                <div>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <input name="firstName" type="text" id="firstName" placeholder="First Name" style="width:161px;">
-                                </td>
-                                <td>
-                                    <input name="username" type="text" id="username" placeholder="Username" style="width:161px;">
-                                </td>
-                                <td style="padding-left: 10px;">
-                                    <input type="submit" style="padding-left: 10px;" class="submit" id="startChat" value="Start Chat">
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-
-                <div>
-
-                </div>
-            </fieldset>
-        </form>
-
-    </section>
-
-    <script>
-        $(document).ready((a) => {
-            connect.ChatInterface.init({
-                containerId: 'root',
-                headerConfig: {
-                    isHTML: true,
-                    render: () => {
-                        return  (`
-                            <div class="header-wrapper">
-                                <h2 class="welcome-text">Chat Demo</h2>
-                                <p id="chatDescription">You can modify this header or use the default.</p>
-                            </div>
-                        `)
-                    }
-                }
-            });
-        });
-
-        $(function () {
-            $('#contactDetails').submit(function (e) {
-                e.preventDefault();
-                var enableAttachments = "false";
-                var customerName = $('#firstName').val();
-                var username = $('#username').val();
-                if (!customerName || !username) {
-                    alert('you must enter a name & username');
-                    document.getElementById("contactDetails").reset();
-                } else {
-
-                    console.log("this is the first name:" + customerName);
-                    console.log("this is the username: " + username);
-                    document.getElementById("contactDetails").reset();
-                    connect.ChatInterface.initiateChat({
-                        name: customerName,
-                        username: username,
-                        region: "ap-southeast-1",
-                        apiGatewayEndpoint: "https://ykofbsjd87.execute-api.ap-southeast-1.amazonaws.com/Prod",
-                        contactAttributes: JSON.stringify({
-                            "customerName": customerName
-                        }),
-                        contactFlowId: "5355e64c-512c-4801-8aa1-952156bafa8a",
-                        instanceId: "80c66705-d0c3-44dd-af97-49429522072f",
-                        featurePermissions: {
-                            "ATTACHMENTS": enableAttachments==='true',  // this is the override flag from user for attachments
-                        }
-                    },successHandler, failureHandler);
-
-                    $('#firstName').blur();
-                    $('#username').blur();
-                    document.getElementById("startChat").disabled = true;
-                    document.getElementById("firstName").disabled = true;
-                    document.getElementById("username").disabled = true;
-                    $("#nav").css("width", "1063");
-                    $('#chatWrapper').hide();
-                    $("#section-chat").show("slide");
-                    $("#section-chat").draggable({
-                        handle: ".header-wrapper"
-                    });
-                    $("#divSpinner").delay(310).fadeIn();
-                }
-
-            });
-        });
-
-        //Chat Management
+          <form name="contactDetails" id="contactDetails" style="padding-top: 30px">
+              <fieldset>
+                  <div>
+                      <table>
+                          <tbody>
+                              <tr>
+                                  <td>
+                                      <input name="firstName" type="text" id="firstName" placeholder="First Name"
+                                          style="width:161px;">
+                                  </td>
+                                  <td>
+                                      <input name="username" type="text" id="username" placeholder="Username"
+                                          style="width:161px;">
+                                  </td>
+                                  <td style="padding-left: 10px;">
+                                      <input type="submit" style="padding-left: 10px;" class="submit" id="startChat"
+                                          value="Start Chat"></input>
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
 
 
-        function successHandler(chatSession) {
-            window.chatSession = chatSession;
+                  <div>
 
-            // chat connected
+                  </div>
+              </fieldset>
+          </form>
 
-            $("#divSpinner").fadeOut(200);
-            $('#chatWrapper').fadeIn(400);
+      </section>
 
-            //Change the incoming data set
-            chatSession.incomingItemDecorator = function (item) {
-                if (["SYSTEM_MESSAGE"].indexOf(item.displayName) !== -1) {
-                    item.displayName = "System Message";
-                }
+      <script>
+          $(document).ready((a) => {
+              connect.ChatInterface.init({
+                  containerId: 'root',
+                  headerConfig: {
+                      isHTML: true,
+                      render: () => {
+                          return  (`
+                              <div class="header-wrapper">
+                                  <h2 class="welcome-text">Chat Demo</h2>
+                                  <p id="chatDescription">You can modify this header or use the default.</p>
+                              </div>
+                          `)
+                      }
+                  }
+              });
+          });
 
-                if (chatSession.transcript.length > 0) {
-                    var transcriptItem = chatSession.transcript[chatSession.transcript.length - 1];
-                    if (transcriptItem.transportDetails.direction === "Incoming") {
-                        var chatDescription = "This is a demo of a customer chat experience.";
-                        var name = transcriptItem.displayName;
-                        if (["prod", "$LATEST", "AI Assistant", "SYSTEM_MESSAGE", "System Message"].indexOf(name) === -1) {
-                            chatDescription = "You are now chatting with " + name;
-                        }
-                        document.getElementById("chatDescription").innerHTML = chatDescription;
-                    }
-                }
+          $(function () {
+              $('#contactDetails').submit(function (e) {
+                  e.preventDefault();
+                  var enableAttachments = "false";
+                  var customerName = $('#firstName').val();
+                  var username = $('#username').val();
+                  if (!customerName || !username) {
+                      alert('you must enter a name & username');
+                      document.getElementById("contactDetails").reset();
+                  } else {
 
-                return item;
-            }
+                      console.log("this is the first name:" + customerName);
+                      console.log("this is the username: " + username);
+                      document.getElementById("contactDetails").reset();
+                      connect.ChatInterface.initiateChat({
+                          name: customerName,
+                          username: username,
+                          region: "ap-southeast-1",
+                          apiGatewayEndpoint: "https://ykofbsjd87.execute-api.ap-southeast-1.amazonaws.com/Prod",
+                          contactAttributes: JSON.stringify({
+                              "customerName": customerName
+                          }),
+                          contactFlowId: "5355e64c-512c-4801-8aa1-952156bafa8a",
+                          instanceId: "80c66705-d0c3-44dd-af97-49429522072f",
+                          featurePermissions: {
+                              "ATTACHMENTS": enableAttachments==='true',  // this is the override flag from user for attachments
+                          }
+                      },successHandler, failureHandler);
 
-            chatSession.onIncoming(function (data) {
-                console.log("incoming message:|| " + JSON.stringify(data));
-            });
+                      $('#firstName').blur();
+                      $('#username').blur();
+                      document.getElementById("startChat").disabled = true;
+                      document.getElementById("firstName").disabled = true;
+                      document.getElementById("username").disabled = true;
+                      $("#nav").css("width", "1063");
+                      $('#chatWrapper').hide();
+                      $("#section-chat").show("slide");
+                      $("#section-chat").draggable({
+                          handle: ".header-wrapper"
+                      });
+                      $("#divSpinner").delay(310).fadeIn();
+                  }
 
-            chatSession.onOutgoing(function (data) {
-                //  console.log("outgoing message: " + JSON.stringify(data));
-            });
+              });
+          });
 
-            chatSession.onChatDisconnected(function (data) {
-                resetForm();
-            });
-
-            connect.ChatInterface.init({
-                containerId: 'root',
-                headerConfig: {
-                    isHTML: true,
-                    render: () => {
-                        return  (`
-                            <div class="header-wrapper">
-                                <h2 class="welcome-text">Chat Demo</h2>
-                                <p id="chatDescription">You can modify this header or use the default.</p>
-                            </div>
-                        `)
-                    }
-                }
-            });
-        }
+          //Chat Management
 
 
+          function successHandler(chatSession) {
+              window.chatSession = chatSession;
 
-        function failureHandler(error) {
-            // chat failed
-            console.log("failed", error);
-        }
+              // chat connected
 
-        function resetForm() {
-            document.getElementById("startChat").disabled = false;
-            document.getElementById("firstName").disabled = false;
-            document.getElementById("username").disabled = false;
-            $("#section-chat").removeAttr('style');
-            $("#nav").css("width", "690");
-            $("#section-chat").hide("slide");
-            document.getElementById("contactDetails").reset();
-        }
-    </script>
+              $("#divSpinner").fadeOut(200);
+              $('#chatWrapper').fadeIn(400);
 
-    <section class="section-chat ui-draggable" id="section-chat" style="display: none;">
+              //Change the incoming data set
+              chatSession.incomingItemDecorator = function (item) {
+                  if (["SYSTEM_MESSAGE"].indexOf(item.displayName) !== -1) {
+                      item.displayName = "System Message";
+                  }
+
+                  if (chatSession.transcript.length > 0) {
+                      var transcriptItem = chatSession.transcript[chatSession.transcript.length - 1];
+                      if (transcriptItem.transportDetails.direction === "Incoming") {
+                          var chatDescription = "This is a demo of a customer chat experience.";
+                          var name = transcriptItem.displayName;
+                          if (["prod", "$LATEST", "AI Assistant", "SYSTEM_MESSAGE", "System Message"].indexOf(name) === -1) {
+                              chatDescription = "You are now chatting with " + name;
+                          }
+                          document.getElementById("chatDescription").innerHTML = chatDescription;
+                      }
+                  }
+
+                  return item;
+              }
+
+              chatSession.onIncoming(function (data) {
+                  console.log("incoming message:|| " + JSON.stringify(data));
+              });
+
+              chatSession.onOutgoing(function (data) {
+                  //  console.log("outgoing message: " + JSON.stringify(data));
+              });
+
+              chatSession.onChatDisconnected(function (data) {
+                  resetForm();
+              });
+
+              connect.ChatInterface.init({
+                  containerId: 'root',
+                  headerConfig: {
+                      isHTML: true,
+                      render: () => {
+                          return  (`
+                              <div class="header-wrapper">
+                                  <h2 class="welcome-text">Chat Demo</h2>
+                                  <p id="chatDescription">You can modify this header or use the default.</p>
+                              </div>
+                          `)
+                      }
+                  }
+              });
+          }
 
 
 
-        <div id="chatWrapper" style="">
-            <div id="root"><div class="sc-kafWEX kIvKhy connect-customer-interface"><div class="sc-dnqmqq sc-cIShpX ixATAW"></div></div></div>
-        </div>
-        <div class="centered">
-            <div id="divSpinner" class="spinner loading" style="display: none;">
-                <div class="loading-text">Loading</div>
-            </div>
+          function failureHandler(error) {
+              // chat failed
+              console.log("failed", error);
+          }
 
-            <script>
-                ! function (l) {
-                    function e(e) {
-                        for (var r, t, n = e[0], o = e[1], u = e[2], f = 0, i = []; f < n.length; f++) t = n[f], p[
-                                t] &&
-                            i.push(
-                                p[t][0]), p[t] = 0;
-                        for (r in o) Object.prototype.hasOwnProperty.call(o, r) && (l[r] = o[r]);
-                        for (s && s(e); i.length;) i.shift()();
-                        return c.push.apply(c, u || []), a()
-                    }
+          function resetForm() {
+              document.getElementById("startChat").disabled = false;
+              document.getElementById("firstName").disabled = false;
+              document.getElementById("username").disabled = false;
+              $("#section-chat").removeAttr('style');
+              $("#nav").css("width", "690");
+              $("#section-chat").hide("slide");
+              document.getElementById("contactDetails").reset();
+          }
+      </script>
 
-                    function a() {
-                        for (var e, r = 0; r < c.length; r++) {
-                            for (var t = c[r], n = !0, o = 1; o < t.length; o++) {
-                                var u = t[o];
-                                0 !== p[u] && (n = !1)
-                            }
-                            n && (c.splice(r--, 1), e = f(f.s = t[0]))
-                        }
-                        return e
-                    }
-                    var t = {},
-                        p = {
-                            1: 0
-                        },
-                        c = [];
+      <section class="section-chat" id="section-chat" style="display: none">
 
-                    function f(e) {
-                        if (t[e]) return t[e].exports;
-                        var r = t[e] = {
-                            i: e,
-                            l: !1,
-                            exports: {}
-                        };
-                        return l[e].call(r.exports, r, r.exports, f), r.l = !0, r.exports
-                    }
-                    f.m = l, f.c = t, f.d = function (e, r, t) {
-                        f.o(e, r) || Object.defineProperty(e, r, {
-                            enumerable: !0,
-                            get: t
-                        })
-                    }, f.r = function (e) {
-                        "undefined" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol
-                            .toStringTag, {
-                                value: "Module"
-                            }), Object.defineProperty(e, "__esModule", {
-                            value: !0
-                        })
-                    }, f.t = function (r, e) {
-                        if (1 & e && (r = f(r)), 8 & e) return r;
-                        if (4 & e && "object" == typeof r && r && r.__esModule) return r;
-                        var t = Object.create(null);
-                        if (f.r(t), Object.defineProperty(t, "default", {
-                                enumerable: !0,
-                                value: r
-                            }), 2 & e && "string" != typeof r)
-                            for (var n in r) f.d(t, n, function (e) {
-                                return r[e]
-                            }.bind(null, n));
-                        return t
-                    }, f.n = function (e) {
-                        var r = e && e.__esModule ? function () {
-                            return e.default
-                        } : function () {
-                            return e
-                        };
-                        return f.d(r, "a", r), r
-                    }, f.o = function (e, r) {
-                        return Object.prototype.hasOwnProperty.call(e, r)
-                    }, f.p = "./";
-                    var r = window.webpackJsonp = window.webpackJsonp || [],
-                        n = r.push.bind(r);
-                    r.push = e, r = r.slice();
-                    for (var o = 0; o < r.length; o++) e(r[o]);
-                    var s = n;
-                    a()
-                }([])
-            </script>
 
-            <script src="/assets/js/amazon-connect-chat-interface.js"></script>
-    </div></section>
+
+          <div id="chatWrapper">
+              <div id="root"></div>
+          </div>
+          <div class="centered">
+              <div id="divSpinner" class="spinner loading">
+                  <div class="loading-text">Loading</div>
+              </div>
+
+              <script>
+                  ! function (l) {
+                      function e(e) {
+                          for (var r, t, n = e[0], o = e[1], u = e[2], f = 0, i = []; f < n.length; f++) t = n[f], p[
+                                  t] &&
+                              i.push(
+                                  p[t][0]), p[t] = 0;
+                          for (r in o) Object.prototype.hasOwnProperty.call(o, r) && (l[r] = o[r]);
+                          for (s && s(e); i.length;) i.shift()();
+                          return c.push.apply(c, u || []), a()
+                      }
+
+                      function a() {
+                          for (var e, r = 0; r < c.length; r++) {
+                              for (var t = c[r], n = !0, o = 1; o < t.length; o++) {
+                                  var u = t[o];
+                                  0 !== p[u] && (n = !1)
+                              }
+                              n && (c.splice(r--, 1), e = f(f.s = t[0]))
+                          }
+                          return e
+                      }
+                      var t = {},
+                          p = {
+                              1: 0
+                          },
+                          c = [];
+
+                      function f(e) {
+                          if (t[e]) return t[e].exports;
+                          var r = t[e] = {
+                              i: e,
+                              l: !1,
+                              exports: {}
+                          };
+                          return l[e].call(r.exports, r, r.exports, f), r.l = !0, r.exports
+                      }
+                      f.m = l, f.c = t, f.d = function (e, r, t) {
+                          f.o(e, r) || Object.defineProperty(e, r, {
+                              enumerable: !0,
+                              get: t
+                          })
+                      }, f.r = function (e) {
+                          "undefined" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol
+                              .toStringTag, {
+                                  value: "Module"
+                              }), Object.defineProperty(e, "__esModule", {
+                              value: !0
+                          })
+                      }, f.t = function (r, e) {
+                          if (1 & e && (r = f(r)), 8 & e) return r;
+                          if (4 & e && "object" == typeof r && r && r.__esModule) return r;
+                          var t = Object.create(null);
+                          if (f.r(t), Object.defineProperty(t, "default", {
+                                  enumerable: !0,
+                                  value: r
+                              }), 2 & e && "string" != typeof r)
+                              for (var n in r) f.d(t, n, function (e) {
+                                  return r[e]
+                              }.bind(null, n));
+                          return t
+                      }, f.n = function (e) {
+                          var r = e && e.__esModule ? function () {
+                              return e.default
+                          } : function () {
+                              return e
+                          };
+                          return f.d(r, "a", r), r
+                      }, f.o = function (e, r) {
+                          return Object.prototype.hasOwnProperty.call(e, r)
+                      }, f.p = "./";
+                      var r = window.webpackJsonp = window.webpackJsonp || [],
+                          n = r.push.bind(r);
+                      r.push = e, r = r.slice();
+                      for (var o = 0; o < r.length; o++) e(r[o]);
+                      var s = n;
+                      a()
+                  }([])
+              </script>
+
+              <script src="assets/js/amazon-connect-chat-interface.js"></script>
+      </section>
   </div>
-
-  <textarea tab-index="-1" aria-hidden="true" style="min-height: 0px !important; max-height: none !important; height: 0px !important; visibility: hidden !important; overflow: hidden !important; position: absolute !important; z-index: -1000 !important; top: 0px !important; right: 0px !important; border-width: 0px; box-sizing: border-box; font-family: Arial, sans-serif; font-size: 14px; font-style: normal; font-weight: 400; letter-spacing: normal; line-height: 24px; padding: 10px 10px 10px 0px; tab-size: 8; text-indent: 0px; text-rendering: auto; text-transform: none; width: 320px;"></textarea>
-  
 </body>
 </html>
