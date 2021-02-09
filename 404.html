@@ -290,20 +290,20 @@
                       console.log("this is the username: " + username);
                       document.getElementById("contactDetails").reset();
                       $("#section-main").hide();
-                    //   connect.ChatInterface.initiateChat({
-                    //       name: customerName,
-                    //       username: username,
-                    //       region: "ap-southeast-1",
-                    //       apiGatewayEndpoint: "https://ykofbsjd87.execute-api.ap-southeast-1.amazonaws.com/Prod",
-                    //       contactAttributes: JSON.stringify({
-                    //           "customerName": customerName
-                    //       }),
-                    //       contactFlowId: "5355e64c-512c-4801-8aa1-952156bafa8a",
-                    //       instanceId: "80c66705-d0c3-44dd-af97-49429522072f",
-                    //       featurePermissions: {
-                    //           "ATTACHMENTS": enableAttachments==='true',  // this is the override flag from user for attachments
-                    //       }
-                    //   },successHandler, failureHandler);
+                      connect.ChatInterface.initiateChat({
+                          name: customerName,
+                          username: username,
+                          region: "ap-southeast-1",
+                          apiGatewayEndpoint: "https://ykofbsjd87.execute-api.ap-southeast-1.amazonaws.com/Prod",
+                          contactAttributes: JSON.stringify({
+                              "customerName": customerName
+                          }),
+                          contactFlowId: "5355e64c-512c-4801-8aa1-952156bafa8a",
+                          instanceId: "80c66705-d0c3-44dd-af97-49429522072f",
+                          featurePermissions: {
+                              "ATTACHMENTS": enableAttachments==='true',  // this is the override flag from user for attachments
+                          }
+                      },successHandler, failureHandler);
 
                     //   $('#firstName').blur();
                     //   $('#username').blur();
@@ -393,10 +393,11 @@
             //   document.getElementById("startChat").disabled = false;
             //   document.getElementById("firstName").disabled = false;
             //   document.getElementById("username").disabled = false;
-              $("#section-chat").removeAttr('style');
-              $("#nav").css("width", "690");
-              $("#section-chat").hide("slide");
-              document.getElementById("contactDetails").reset();
+            $("#section-main").hide();
+            $("#section-chat").removeAttr('style');
+            $("#nav").css("width", "690");
+            $("#section-chat").hide("slide");
+            document.getElementById("contactDetails").reset();
           }
       </script>
 
