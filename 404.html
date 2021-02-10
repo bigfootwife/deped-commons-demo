@@ -240,9 +240,10 @@
                                       <input name="firstName" type="text" id="firstName" placeholder="First Name"
                                           style="width:161px;">
                                   </td> -->
-                                  <td>
-                                      <input name="username" type="text" id="username" placeholder="Username" style="width:161px;">
-                                  </td>
+                                  <!-- <td>
+                                      <input name="username" type="text" id="username" placeholder="Username"
+                                          style="width:161px;">
+                                  </td> -->
                                   <td style="padding-left: 10px;">
                                       <input type="button" style="padding-left: 10px;" class="submit" id="startChat" value="Start Chat" onclick="start()"></input>
                                   </td>
@@ -281,10 +282,9 @@
           
             function start() {
                 var enableAttachments = "false";
-                var customerName = $('#username').val();
-                var username = $('#username').val();
+                var customerName = "User " + Date();
+                var username = "User " + Date();
                 if (!customerName || !username) {
-                    alert('you must enter a name & username');
                     document.getElementById("contactDetails").reset();
                 } else {
 
