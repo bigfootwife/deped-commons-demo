@@ -283,8 +283,8 @@
           
             function start() {
                 var enableAttachments = "false";
-                var customerName = "User " + Date();
-                var username = "User " + Date();
+                var customerName = "User " + Date.now();
+                var username = "User " + Date.now();
                 if (!customerName || !username) {
                     document.getElementById("contactDetails").reset();
                 } else {
